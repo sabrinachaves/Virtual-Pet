@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VirtualPet
+namespace VirtualPet.Models
 {
     public class Ability
     {
-        public string name { get; set; }
-        public bool is_hidden  { get; set; }
-
+        public AbilityName ability { get; set; }
+        public bool is_hidden { get; set; }
     }
 }

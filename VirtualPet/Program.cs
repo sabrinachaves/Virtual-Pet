@@ -1,7 +1,7 @@
 ﻿using RestSharp;
 using System.Text;
 using System.Text.Json;
-using VirtualPet;
+using VirtualPet.Models;
 
 Console.WriteLine("Seja bem-vindo ao Virtual Pet!\n");
 string chosenPokemon = "";
@@ -61,7 +61,9 @@ void Menu()
             Console.WriteLine($"Nome do pokemon: {pokemon.name}");
             Console.WriteLine($"Altura: {pokemon.height}");
             Console.WriteLine($"Peso: {pokemon.weight}");
-            AuxMenu();
+            Console.WriteLine($"Habilidades:");
+            pokemon.abilities.ForEach(abil => Console.WriteLine(abil.ability.name));
+        AuxMenu();
         }
         else
         {
