@@ -5,6 +5,8 @@ using VirtualPet.Models;
 using VirtualPet.Views;
 using VirtualPet.Controllers;
 
-PetController start = new PetController();
+PetController Start = new PetController();
 
-start.Play();
+Start.MainMenu();
+
+Console.ReadKey();
