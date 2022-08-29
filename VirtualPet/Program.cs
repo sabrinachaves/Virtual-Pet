@@ -2,12 +2,9 @@
 using System.Text;
 using System.Text.Json;
 using VirtualPet.Models;
-using VirtualPet;
+using VirtualPet.Views;
+using VirtualPet.Controllers;
 
+PetController start = new PetController();
 
-MainMenu menu = new MainMenu();
-
-menu.Start();
-menu.Main();
-
-Console.ReadKey();
+start.Play();

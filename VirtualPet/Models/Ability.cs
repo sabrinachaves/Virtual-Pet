@@ -10,5 +10,6 @@ namespace VirtualPet.Models
     {
         public AbilityName ability { get; set; }
         public bool is_hidden { get; set; }
+
     }
 }

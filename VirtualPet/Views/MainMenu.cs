@@ -7,14 +7,13 @@ using RestSharp;
 using System.Text.Json;
 using VirtualPet.Models;
 
-namespace VirtualPet
+namespace VirtualPet.Views
 {
     public class MainMenu
     {
-        
         string chosenPokemon = "";
         string name = "";
-        
+
         public void Start()
         {
             Console.WriteLine("Seja bem-vindo ao Virtual Pet!\n" +
@@ -34,10 +33,10 @@ namespace VirtualPet
                 Console.WriteLine("1 - Adotar um mascote;\n" +
                 "2 - Ver seus mascotes;\n" +
                 "3 - Sair");
-                option = Int32.Parse(Console.ReadLine());
+                option = int.Parse(Console.ReadLine());
             } while (option < 1 || option > 3);
 
-                switch (option)
+            switch (option)
             {
                 case 1:
                     Menu();
@@ -50,7 +49,7 @@ namespace VirtualPet
                     break;
                 default:
                     Console.WriteLine("Você escolheu uma opção inválida!");
-                   break;
+                    break;
             }
         }
         public void Menu()
@@ -62,30 +61,30 @@ namespace VirtualPet
                 "3 - Venusaur\n" +
                 "4 - Goldeen\n" +
                 "5 - Seadra\n");
-            int option = Int32.Parse(Console.ReadLine());
+            int option = int.Parse(Console.ReadLine());
 
 
             switch (option)
             {
                 case 1:
                     chosenPokemon = "bulbasaur";
-                    feature();
+                    AdoptionMenu();
                     break;
                 case 2:
                     chosenPokemon = "ivysaur";
-                    feature();
+                    AdoptionMenu();
                     break;
                 case 3:
                     chosenPokemon = "venusaur";
-                    feature();
+                    AdoptionMenu();
                     break;
                 case 4:
                     chosenPokemon = "goldeen";
-                    feature();
+                    AdoptionMenu();
                     break;
                 case 5:
                     chosenPokemon = "seadra";
-                    feature();
+                    AdoptionMenu();
                     break;
                 default:
                     Console.WriteLine("Você escolheu uma opção inválida. Escolha novamente!");
@@ -93,28 +92,59 @@ namespace VirtualPet
                     break;
             }
 
-            void feature()
+        }
+
+
+        void Feature()
+        {
+            var client = new RestClient($"https://pokeapi.co/api/v2/pokemon/{chosenPokemon}");
+            var request = new RestRequest("", Method.Get);
+
+            var response = client.Execute(request);
+
+            Pokemon pokemon = JsonSerializer.Deserialize<Pokemon>(response.Content);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                var client = new RestClient($"https://pokeapi.co/api/v2/pokemon/{chosenPokemon}");
-                var request = new RestRequest("", Method.Get);
+                Console.WriteLine($"\n\n-----------------------------------INFO DOS MASCOTES------------------------------------");
+                Console.WriteLine($"Nome do pokemon: {pokemon.name}");
+                Console.WriteLine($"Altura: {pokemon.height}");
+                Console.WriteLine($"Peso: {pokemon.weight}");
+                Console.WriteLine($"Habilidades:");
+                pokemon.abilities.ForEach(abil => Console.WriteLine(abil.ability.name));
+                AuxMenu();
+            }
+            else
+            {
+                Console.WriteLine(response.ErrorMessage);
+            }
+        }
 
-                var response = client.Execute(request);
+        void AdoptionMenu()
+        {
+            Console.WriteLine($"\n\n-----------------------------------------MENU DE ADOÇÃO-----------------------------------------------");
+            int option;
+            do
+            {
+                Console.WriteLine($"\n{name}, o que deseja fazer?" +
+                "\n1 - Ver as infos do pokemon;" +
+                "\n2 - Adotar este pokemon;" +
+                "\n3 - Voltar ao menu inicial.");
+                option = int.Parse(Console.ReadLine());
+            } while (option < 1 || option > 3);
 
-                Pokemon pokemon = JsonSerializer.Deserialize<Pokemon>(response.Content);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    Console.WriteLine($"\n\n-----------------------------------INFO DOS MASCOTES------------------------------------");
-                    Console.WriteLine($"Nome do pokemon: {pokemon.name}");
-                    Console.WriteLine($"Altura: {pokemon.height}");
-                    Console.WriteLine($"Peso: {pokemon.weight}");
-                    Console.WriteLine($"Habilidades:");
-                    pokemon.abilities.ForEach(abil => Console.WriteLine(abil.ability.name));
-                    AuxMenu();
-                }
-                else
-                {
-                    Console.WriteLine(response.ErrorMessage);
-                }
+
+
+            switch (option)
+            {
+                case 1:
+                    Feature();
+                    break;
+                case 2:
+                    Console.WriteLine($"\nParabéns, {name}! Você adotou um mascote!!! O ovo está chocando...");
+                    break;
+                case 3:
+                    Main();
+                    break;
             }
         }
 
@@ -132,12 +162,12 @@ namespace VirtualPet
                 "\n3 - Voltar ao menu inicial;" +
                 "\n4 - Sair.");
 
-                option = Int32.Parse(Console.ReadLine());
+                option = int.Parse(Console.ReadLine());
             } while (option < 1 || option > 4);
 
 
 
-                switch (option)
+            switch (option)
             {
                 case 1:
                     Console.WriteLine($"\nParabéns, {name}! Você adotou um mascote!!! O ovo está chocando...");
