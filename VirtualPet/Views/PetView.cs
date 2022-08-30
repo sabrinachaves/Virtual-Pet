@@ -34,7 +34,7 @@ namespace VirtualPet.Views
         }
         public void PetMenu()
         {
-            Console.WriteLine($"\n\n------------------------------------MASCOTES DISPÓNÍVEIS-------------------------------------");
+            Console.WriteLine($"\n\n---------------------------------MASCOTES DISPÓNÍVEIS----------------------------------");
             Console.WriteLine("Escolha um pokemon através do respectivo número:\n");
             Console.WriteLine("1 - Bulbasaur\n" +
                 "2 - Ivysaur\n" +
@@ -45,7 +45,7 @@ namespace VirtualPet.Views
 
         public void AdoptionMenu()
         {
-            Console.WriteLine($"\n\n-----------------------------------------MENU DE ADOÇÃO-----------------------------------------------");
+            Console.WriteLine($"\n\n----------------------------------MENU DE ADOÇÃO----------------------------------------");
                 Console.WriteLine($"\n{name}, o que deseja fazer agora?" +
                 "\n1 - Ver as infos do pokemon;" +
                 "\n2 - Adotar este pokemon;" +
@@ -54,7 +54,7 @@ namespace VirtualPet.Views
 
         public void AuxMenu()
         {
-                Console.WriteLine($"\n\n--------------------------------------------------------------------------------------------");
+                Console.WriteLine($"\n\n-------------------------------------------------------------------------------------");
                 Console.WriteLine($"\n{name}, o que deseja fazer agora?" +
                 "\n1 - Adotar este pokemon;" +
                 "\n2 - Voltar a lista de mascotes;" +
@@ -64,11 +64,25 @@ namespace VirtualPet.Views
 
         public void InfoPet()
         {
-            Console.WriteLine($"\n\n--------------------------------------------------------------------------------------------");
+            Console.WriteLine($"\n\n-----------------------------------------------------------------------------------------");
             Console.WriteLine($"\n{name}, o que deseja fazer agora?" +
             "\n1 - Ver status do pet;" +
-            "\n2 - Voltar ao menu inicial;" +
-            "\n3 - Sair.");
+            "\n2 - Brincar com o pet;" +
+            "\n3 - Voltar ao menu inicial;" +
+            "\n4 - Sair.");
+        }
+
+        public void PlayWithPet()
+        {
+            Console.WriteLine($"\n\n---------------------------------BRINCAR COM O PET----------------------------------------");
+            Console.WriteLine($"\n{name}, o que deseja fazer agora?" +
+            "\n1 - Alimentar;" +
+            "\n2 - Afagar;" +
+            "\n3 - Exercitar;" +
+            "\n4 - Estudar;" +
+            "\n5 - Dar banho;" +
+            "\n6 - Voltar ao menu inicial;" +
+            "\n7 - Sair.");
         }
     }
 }

@@ -161,7 +161,7 @@ namespace VirtualPet.Controllers
             {
                 Menus.AuxMenu();
                 option = int.Parse(Console.ReadLine());
-            } while (option < 1 || option > 5);
+            } while (option < 1 || option > 4);
 
             switch (option)
             {
@@ -193,19 +193,70 @@ namespace VirtualPet.Controllers
             {
                 Menus.InfoPet();
                 option = int.Parse(Console.ReadLine());
-            } while (option < 1 || option > 5);
+            } while (option < 1 || option > 4);
 
             switch (option)
             {
                 case 1:
                     Console.WriteLine("Digite o nome do pet que gostaria de visualizar: ");
-                    string namePet = Console.ReadLine();
-                    AdoptedPets.Find(pet => pet.name == namePet).Status();
+                    string petName = Console.ReadLine();
+                    AdoptedPets.Find(pet => pet.name == petName).Status();
+                    InfoPet();
                     break;
                 case 2:
-                    MainMenu();
+                    Console.WriteLine("Digite o nome do pet que gostaria de brincar: ");
+                    string pokemonName = Console.ReadLine();
+                    PlayWithPet(pokemonName);
                     break;
                 case 3:
+                    MainMenu();
+                    break;
+                case 4:
+                    Environment.Exit(0);
+                    break;
+            }
+        }
+
+        public void PlayWithPet(string name)
+        {
+            int option;
+            do
+            {
+                Menus.PlayWithPet();
+                option = int.Parse(Console.ReadLine());
+            } while (option < 1 || option > 7);
+
+            switch (option)
+            {
+                case 1:
+                    AdoptedPets.Find(pet => pet.name == name).Feed();
+                    AdoptedPets.Find(pet => pet.name == name).Status();
+                    PlayWithPet(name);
+                    break;
+                case 2:
+                    AdoptedPets.Find(pet => pet.name == name).Kindness();
+                    AdoptedPets.Find(pet => pet.name == name).Status();
+                    PlayWithPet(name);
+                    break;
+                case 3:
+                    AdoptedPets.Find(pet => pet.name == name).Workout();
+                    AdoptedPets.Find(pet => pet.name == name).Status();
+                    PlayWithPet(name);
+                    break;
+                case 4:
+                    AdoptedPets.Find(pet => pet.name == name).Study();
+                    AdoptedPets.Find(pet => pet.name == name).Status();
+                    PlayWithPet(name);
+                    break;
+                case 5:
+                    AdoptedPets.Find(pet => pet.name == name).Clean();
+                    AdoptedPets.Find(pet => pet.name == name).Status();
+                    PlayWithPet(name);
+                    break;
+                case 6:
+                    MainMenu();
+                    break;
+                case 7:
                     Environment.Exit(0);
                     break;
             }
