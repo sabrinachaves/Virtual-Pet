@@ -9,11 +9,11 @@ using VirtualPet.Models;
 
 namespace VirtualPet.Views
 {
-    public class MainView
+    public class PetView
     {
         string name = "";
 
-        public MainView()
+        public PetView()
         {
             Start();
         }
@@ -46,7 +46,7 @@ namespace VirtualPet.Views
         public void AdoptionMenu()
         {
             Console.WriteLine($"\n\n-----------------------------------------MENU DE ADOÇÃO-----------------------------------------------");
-                Console.WriteLine($"\n{name}, o que deseja fazer?" +
+                Console.WriteLine($"\n{name}, o que deseja fazer agora?" +
                 "\n1 - Ver as infos do pokemon;" +
                 "\n2 - Adotar este pokemon;" +
                 "\n3 - Voltar ao menu inicial.");
@@ -60,6 +60,15 @@ namespace VirtualPet.Views
                 "\n2 - Voltar a lista de mascotes;" +
                 "\n3 - Voltar ao menu inicial;" +
                 "\n4 - Sair.");
+        }
+
+        public void InfoPet()
+        {
+            Console.WriteLine($"\n\n--------------------------------------------------------------------------------------------");
+            Console.WriteLine($"\n{name}, o que deseja fazer agora?" +
+            "\n1 - Ver status do pet;" +
+            "\n2 - Voltar ao menu inicial;" +
+            "\n3 - Sair.");
         }
     }
 }

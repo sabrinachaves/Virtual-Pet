@@ -15,11 +15,11 @@ namespace VirtualPet.Controllers
         string chosenPokemon = "";
         Pokemon adoptedPokemon = new Pokemon();
 
-        private MainView Menus { get; set; }
+        private PetView Menus { get; set; }
         public List<Pokemon> AdoptedPets { get; set; }
         public PetController()
         {
-            this.Menus = new MainView();
+            this.Menus = new PetView();
             this.AdoptedPets = new List<Pokemon>();
         }
 
@@ -40,7 +40,7 @@ namespace VirtualPet.Controllers
                 case 2:
                     Console.WriteLine("Seus mascotes são: ");
                     AdoptedPets.ForEach(pet => Console.WriteLine(pet.name));
-                    MainMenu();
+                    InfoPet();
                     break;
                 case 3:
                     Environment.Exit(0);
@@ -186,6 +186,30 @@ namespace VirtualPet.Controllers
             }
         }
 
+        public void InfoPet()
+        {
+            int option;
+            do
+            {
+                Menus.InfoPet();
+                option = int.Parse(Console.ReadLine());
+            } while (option < 1 || option > 5);
+
+            switch (option)
+            {
+                case 1:
+                    Console.WriteLine("Digite o nome do pet que gostaria de visualizar: ");
+                    string namePet = Console.ReadLine();
+                    AdoptedPets.Find(pet => pet.name == namePet).Status();
+                    break;
+                case 2:
+                    MainMenu();
+                    break;
+                case 3:
+                    Environment.Exit(0);
+                    break;
+            }
+        }
         
     }
 }
