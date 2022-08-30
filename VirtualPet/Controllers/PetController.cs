@@ -13,10 +13,14 @@ namespace VirtualPet.Controllers
     public class PetController
     {
         string chosenPokemon = "";
+        Pokemon adoptedPokemon = new Pokemon();
+
         private MainView Menus { get; set; }
+        public List<Pokemon> AdoptedPets { get; set; }
         public PetController()
         {
             this.Menus = new MainView();
+            this.AdoptedPets = new List<Pokemon>();
         }
 
         public void MainMenu()
@@ -34,7 +38,9 @@ namespace VirtualPet.Controllers
                     PetMenu();
                     break;
                 case 2:
-                    Console.WriteLine("Seus mascotes são: 'Em construção....'");
+                    Console.WriteLine("Seus mascotes são: ");
+                    AdoptedPets.ForEach(pet => Console.WriteLine(pet.name));
+                    MainMenu();
                     break;
                 case 3:
                     Environment.Exit(0);
@@ -101,6 +107,9 @@ namespace VirtualPet.Controllers
                     break;
                 case 2:
                     Console.WriteLine($"\nParabéns! Você adotou um mascote!!! O ovo está chocando...");
+                    AdoptPet();
+                    AdoptedPets.Add(adoptedPokemon);
+                    MainMenu();
                     break;
                 case 3:
                     MainMenu();
@@ -118,18 +127,30 @@ namespace VirtualPet.Controllers
             Pokemon pokemon = JsonSerializer.Deserialize<Pokemon>(response.Content);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                Console.WriteLine($"\n\n-----------------------------------INFO DOS MASCOTES------------------------------------");
+                Console.WriteLine($"\n\n-----------------------------------INFO DO MASCOTE------------------------------------");
                 Console.WriteLine($"Nome do pokemon: {pokemon.name}");
                 Console.WriteLine($"Altura: {pokemon.height}");
                 Console.WriteLine($"Peso: {pokemon.weight}");
                 Console.WriteLine($"Habilidades:");
                 pokemon.abilities.ForEach(abil => Console.WriteLine(abil.ability.name));
+                adoptedPokemon = pokemon;
                 AuxMenu();
             }
             else
             {
                 Console.WriteLine(response.ErrorMessage);
             }
+        }
+
+        void AdoptPet()
+        {
+            var client = new RestClient($"https://pokeapi.co/api/v2/pokemon/{chosenPokemon}");
+            var request = new RestRequest("", Method.Get);
+
+            var response = client.Execute(request);
+
+            Pokemon pokemon = JsonSerializer.Deserialize<Pokemon>(response.Content);
+            adoptedPokemon = pokemon;
         }
 
         void AuxMenu()
@@ -146,6 +167,9 @@ namespace VirtualPet.Controllers
             {
                 case 1:
                     Console.WriteLine($"\nParabéns! Você adotou um mascote!!! O ovo está chocando...");
+                    AdoptPet();
+                    AdoptedPets.Add(adoptedPokemon);
+                    MainMenu();
                     break;
                 case 2:
                     PetMenu();
